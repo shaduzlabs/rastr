@@ -1,0 +1,9 @@
+name=rastr
+version=@RASTR_VERSION_MAJOR@.@RASTR_VERSION_MINOR@.@RASTR_VERSION_MICRO@
+author=Vincenzo Pacella
+maintainer=Vincenzo Pacella <shaduz@shaduzlabs.com>
+sentence=A small, lightweight header-only graphic library
+paragraph=...
+category=Display
+url=https://github.com/shaduzlabs/rastr
+architectures=*

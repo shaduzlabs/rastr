@@ -1,0 +1,9 @@
+[submodule "modules/libpng"]
+	path = modules/libpng
+	url = https://github.com/glennrp/libpng.git
+[submodule "modules/catch2"]
+	path = modules/catch2
+	url = https://github.com/catchorg/Catch2.git
+[submodule "modules/clara"]
+	path = modules/clara
+	url = https://github.com/catchorg/Clara
