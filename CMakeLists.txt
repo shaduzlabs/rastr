@@ -47,7 +47,7 @@ option( RASTR_INSTALL_PATH  "/usr/local/include/")
 
 # Dependencies ----------------------------------------------------------------------------------- #
 
-if(${RASTR_DEMO} OR ${RASTR_TOOLS} OR ${RASTR_TEST})
+if(${RASTR_TOOLS} OR ${RASTR_TEST})
 
   set(Boost_USE_STATIC_LIBS OFF)
   set(Boost_USE_MULTITHREADED ON)
@@ -117,18 +117,20 @@ if($ENV{APPVEYOR})
   set(ENV{APPVEYOR_BUILD_VERSION} "${RASTR_VERSION_STRING}")
 endif()
 
-MESSAGE( "${White}")
-MESSAGE( "${White}    ,-.  ,-.  ,-.  |-  ,-. ")
-MESSAGE( "${White}    |    ,-|  `-.  |   |   ")
-MESSAGE( "${White}    '    `-^  `-'  `'  '   ")
-set(RASTR_BUILD_DESCRIPTION "${Magenta}a tiny graphic library${ColourReset}")
-message(  "    ${RASTR_BUILD_DESCRIPTION} ")
-message(  "                  v. ${RASTR_VERSION_STRING}")
-message(  " ")
-message(  " ")
-message(  "    ${RASTR_BUILD_TYPE} built on ${RASTR_BUILD_HOST} (${RASTR_BUILD_DATE})")
-message(  " ")
-message(  " ")
+if(IS_RASTR)
+  message( "${White}")
+  message( "${White}    ,-.  ,-.  ,-.  |-  ,-. ")
+  message( "${White}    |    ,-|  `-.  |   |   ")
+  message( "${White}    '    `-^  `-'  `'  '   ")
+  set(RASTR_BUILD_DESCRIPTION "${Magenta}a tiny graphic library${ColourReset}")
+  message(  "    ${RASTR_BUILD_DESCRIPTION} ")
+  message(  "                  v. ${RASTR_VERSION_STRING}")
+  message(  " ")
+  message(  " ")
+  message(  "    ${RASTR_BUILD_TYPE} built on ${RASTR_BUILD_HOST} (${RASTR_BUILD_DATE})")
+  message(  " ")
+  message(  " ")
+endif()
 
 # Source files ----------------------------------------------------------------------------------- #
 
