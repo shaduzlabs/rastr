@@ -36,21 +36,28 @@ public:
       return;
     }
 
-    Color oldColor = pixel(x_, y_);
-    Color newColor = color_;
-    if (color_.blendMode() == BlendMode::Invert)
+    auto oldColor = pixel(x_, y_);
+
+    bool isWhite{color_.active()};
+    if (color_.blendMode() == sl::rastr::BlendMode::Invert)
     {
-      newColor = oldColor;
-      newColor.invert();
+      isWhite = !oldColor.active();
+    }
+    unsigned byteIndex = (this->width() * (y_ >> 3)) + x_;
+
+
+    if (isWhite)
+    {
+      this->data()[byteIndex] |= 0x01 << (y_ & 7);
+    }
+    else
+    {
+      this->data()[byteIndex] &= ~(0x01 << (y_ & 7));
     }
 
-    unsigned byteIndex = (this->canvasWidthInBytes() * y_) + x_;
-
-    this->data()[byteIndex] = color_.mono();
-
-    if (invalidate_ && oldColor.mono() != newColor.mono())
+    if (invalidate_ && oldColor.active() != isWhite)
     {
-      Canvas::invalidate(x_, y_);
+      this->invalidate(x_, y_);
     }
   }
 
@@ -68,9 +75,13 @@ public:
     {
       return {};
     }
-    unsigned index = (this->canvasWidthInBytes() * y_) + x_;
 
-    return Color{static_cast<uint8_t>(this->data()[index])};
+    if (((this->data()[x_ + (this->width() * (y_ >> 3))] >> ((y_)&7)) & 0x01) == 0)
+    {
+      return sl::rastr::Color{0};
+    }
+
+    return sl::rastr::Color{0xff};
   }
 };
 
