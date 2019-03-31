@@ -5,8 +5,9 @@
         ##      ##
 ##########      ############################################################# shaduzlabs.com #####*/
 
+#include "default_monospace_7.h"
+
 #include <rastr.h>
-#include <default_monospace_7.h>
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15,7 +16,7 @@ sl::rastr::CanvasMonochrome<128,64> canvas;
 //--------------------------------------------------------------------------------------------------
 
 void setup(){
-  canvas.putText(8, 8, "Hello world", {0xff}, k_font_DefaultMonospace_7);
+  canvas.putText(8, 8, "Hello world!", {0xff}, k_font_DefaultMonospace_7);
 }
 
 void loop() {
