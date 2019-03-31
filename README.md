@@ -4,7 +4,7 @@
 '    `-^  `-'  `'  '
 ```
 
-`rastr` is a lightweight graphic library written in c++.
+`rastr` is a lightweight graphics library written in c++.
 
 ### Features
 - No dependency to other software libraries (not even the `libstd`)
