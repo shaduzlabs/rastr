@@ -29,7 +29,7 @@ void GDisplayMaschineMK2::setPixel(
   Color oldColor = pixel(x_, y_);
 
   bool isWhite{color_.active()};
-  if (color_.blendMode() == BlendMode::Invert)
+  if (color_.blendMode() == BlendMode::invert)
   {
     isWhite = !oldColor.active();
   }

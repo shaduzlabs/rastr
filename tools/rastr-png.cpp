@@ -181,7 +181,7 @@ int main(int argc_, char* argv_[])
 
   auto cli = Help(showHelp) | Opt(pngPath, "PNG file")["-p"]["--png"]("input png file")
              | Opt(outputPath, "Output file")["-o"]["--output"]("output file name")
-             | Opt(grayscale, "Grayscale")["-g"]["--grayscale"](
+             | Opt(grayscale)["-g"]["--grayscale"](
                  "render the bitmap using 8 bits per pixel (default: 1 bit per pixel)");
 
   auto result = cli.parse(Args(argc_, argv_));

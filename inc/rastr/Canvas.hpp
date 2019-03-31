@@ -249,7 +249,7 @@ public:
     Color newColor = color_;
     unsigned byteIndex = (canvasWidthInBytes() * y_) + (3 * x_);
 
-    if (color_.blendMode() == BlendMode::Invert)
+    if (color_.blendMode() == BlendMode::invert)
     {
       newColor = oldColor;
       newColor.invert();
@@ -418,7 +418,7 @@ public:
   {
 
     auto flatSideTriangle = [this, x0_, y0_, x1_, y1_, x2_, y2_, fillColor_](
-                              int x0, int y0, int x1, int y1, int x2, int y2, const Color& color) {
+      int x0, int y0, int x1, int y1, int x2, int y2, const Color& color) {
       int tmpX1 = x0;
       int tmpY1 = y0;
       int tmpX2 = x0;
@@ -773,6 +773,7 @@ public:
     int x, y, rX0, rX1, rY0, rY1;
     rX0 = rY0 = -1 * static_cast<int>(r_);
     rX1 = rY1 = r_;
+    auto rsq = r_ * r_;
 
     switch (type_)
     {
@@ -813,20 +814,26 @@ public:
 
     for (x = rX0; x <= rX1; ++x)
     {
+      const int xAbs = x + x_;
+      if (xAbs < 0 || xAbs >= width())
+        continue;
       for (y = rY0; y <= rY1; ++y)
       {
+        const int yAbs = y + y_;
+        if (yAbs < 0 || yAbs >= height())
+          continue;
         int xysq = ((x * x) + (y * y));
-        int rsq = r_ * r_;
         if ((rsq - xysq < static_cast<int>(r_)) && (xysq - rsq < static_cast<int>(r_)))
         {
-          setPixel((x + x_), (y + y_), color_, false);
+          setPixel(xAbs, yAbs, color_, false);
         }
-        else if (!fillColor_.transparent() && (xysq < rsq))
+        else if (xysq < rsq)
         {
-          setPixel((x + x_), (y + y_), fillColor_, false);
+          setPixel(xAbs, yAbs, fillColor_, false);
         }
       }
     }
+
     invalidate(x_ - r_, y_ - r_, diameter, diameter);
   }
 
@@ -851,7 +858,7 @@ public:
     const Color& color_)
   {
     const auto area = visibleArea(x_, y_, w_, h_);
-    if (!area || (bitsPerPixel_!= 1 && bitsPerPixel_ != 8))
+    if (!area || (bitsPerPixel_ != 1 && bitsPerPixel_ != 8))
     {
       return {};
     }

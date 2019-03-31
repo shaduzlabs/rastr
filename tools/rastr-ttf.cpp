@@ -370,7 +370,7 @@ int main(int argc_, char* argv_[])
              | Opt(fontSize, "Font size")["-s"]["--size"]("font size")
              | Opt(firstChar, "First character")["-f"]["--first"]("first character (default: 32)")
              | Opt(lastChar, "Last character")["-l"]["--last"]("last character (default: 126)")
-             | Opt(grayscale, "Grayscale")["-g"]["--grayscale"](
+             | Opt(grayscale)["-g"]["--grayscale"](
                  "render characters using 8 bits per pixel (default: 1 bit per pixel)")
              | Opt(outputPath, "Output file")["-o"]["--output"]("output file name");
 

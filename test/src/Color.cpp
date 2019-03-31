@@ -123,7 +123,7 @@ TEST_CASE("Color: blend modes", "[util][Color]")
 {
   Color color(11, 33, 55, 77);
 
-  color.setBlendMode(BlendMode::Invert);
+  color.setBlendMode(BlendMode::invert);
 
   CHECK(color.red() == static_cast<uint8_t>(~(11)));
   CHECK(color.green() == static_cast<uint8_t>(~(33)));

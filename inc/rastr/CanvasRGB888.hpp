@@ -38,7 +38,7 @@ public:
 
     Color oldColor = pixel(x_, y_);
     Color newColor = color_;
-    if (color_.blendMode() == BlendMode::Invert)
+    if (color_.blendMode() == BlendMode::invert)
     {
       newColor = oldColor;
       newColor.invert();

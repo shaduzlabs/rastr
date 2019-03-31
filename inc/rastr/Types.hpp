@@ -20,9 +20,9 @@ namespace rastr
 //! The alignment type
 enum class Alignment
 {
-  Left,   //!< Align to the left
-  Center, //!< Center
-  Right,  //!< Align to the right
+  left,   //!< Align to the left
+  center, //!< Center
+  right,  //!< Align to the right
 };
 
 //--------------------------------------------------------------------------------------------------
@@ -30,9 +30,9 @@ enum class Alignment
 //! The blend mode
 enum class BlendMode
 {
-  Normal,      // Normal mode
-  Invert,      // Invert the current color
-  Transparent, // Ignore the current color
+  normal,      // Normal mode
+  invert,      // Invert the current color
+  transparent, // Ignore the current color
 };
 
 //--------------------------------------------------------------------------------------------------

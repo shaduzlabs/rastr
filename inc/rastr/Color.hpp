@@ -28,7 +28,7 @@ class Color
 public:
   //------------------------------------------------------------------------------------------------
 
-  Color() : m_blendMode(BlendMode::Transparent)
+  Color() : m_blendMode(BlendMode::transparent)
   {
   }
 
@@ -75,21 +75,21 @@ public:
 
   uint8_t red() const
   {
-    return (m_blendMode == BlendMode::Invert) ? ~m_red : m_red;
+    return (m_blendMode == BlendMode::invert) ? ~m_red : m_red;
   }
 
   //------------------------------------------------------------------------------------------------
 
   uint8_t green() const
   {
-    return (m_blendMode == BlendMode::Invert) ? ~m_green : m_green;
+    return (m_blendMode == BlendMode::invert) ? ~m_green : m_green;
   }
 
   //------------------------------------------------------------------------------------------------
 
   uint8_t blue() const
   {
-    return (m_blendMode == BlendMode::Invert) ? ~m_blue : m_blue;
+    return (m_blendMode == BlendMode::invert) ? ~m_blue : m_blue;
   }
 
   //------------------------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ public:
 
   bool transparent() const
   {
-    return m_blendMode == BlendMode::Transparent;
+    return m_blendMode == BlendMode::transparent;
   }
 
   //------------------------------------------------------------------------------------------------
@@ -166,7 +166,7 @@ public:
   {
     m_alpha = 0xFF;
     m_red = m_blue = m_green = m_mono = 0;
-    m_blendMode = BlendMode::Normal;
+    m_blendMode = BlendMode::normal;
   }
 
   //------------------------------------------------------------------------------------------------
@@ -174,14 +174,17 @@ public:
   void white()
   {
     m_red = m_blue = m_green = m_alpha = m_mono = 0xFF;
-    m_blendMode = BlendMode::Normal;
+    m_blendMode = BlendMode::normal;
   }
 
   //------------------------------------------------------------------------------------------------
 
   void invert()
   {
-    m_blendMode = BlendMode::Invert;
+    m_red ^= 0xFF;
+    m_green ^= 0xFF;
+    m_blue ^= 0xFF;
+    m_mono ^= 0xFF;
   }
 
 
@@ -247,7 +250,7 @@ private:
   uint8_t m_blue{0U};
   uint8_t m_alpha{255U};
   uint8_t m_mono{0U};
-  BlendMode m_blendMode{BlendMode::Normal};
+  BlendMode m_blendMode{BlendMode::normal};
 };
 
 // -------------------------------------------------------------------------------------------------

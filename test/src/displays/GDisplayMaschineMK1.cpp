@@ -52,7 +52,7 @@ void GDisplayMaschineMK1::setPixel(
   Color oldColor = pixel(x_, y_);
   unsigned byteIndex = (canvasWidthInBytes() * y_) + ((x_ / 3) * 2);
   uint8_t pixelValue{0};
-  if (color_.blendMode() == BlendMode::Invert)
+  if (color_.blendMode() == BlendMode::invert)
   {
     Color newColor = oldColor;
     newColor.invert();

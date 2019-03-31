@@ -39,7 +39,7 @@ public:
     auto oldColor = pixel(x_, y_);
 
     bool isWhite{color_.active()};
-    if (color_.blendMode() == sl::rastr::BlendMode::Invert)
+    if (color_.blendMode() == sl::rastr::BlendMode::invert)
     {
       isWhite = !oldColor.active();
     }
