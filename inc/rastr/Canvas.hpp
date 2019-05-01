@@ -99,7 +99,8 @@ public:
    */
   virtual bool withinCanvas(int x_, int y_) const noexcept
   {
-    return x_ >= 0 && y_ >= 0 && x_ < width() && y_ < height();
+    return x_ >= 0 && y_ >= 0 && static_cast<unsigned>(x_) < width()
+           && static_cast<unsigned>(y_) < height();
   }
   //------------------------------------------------------------------------------------------------
 
@@ -349,7 +350,7 @@ public:
    */
   virtual void lineVertical(int x_, int y_, unsigned l_, const Color& color_)
   {
-    for (auto y = y_; y < y_ + l_; ++y)
+    for (int y = y_; y < y_ + static_cast<int>(l_); ++y)
     {
       setPixel(x_, y, color_, false);
     }
@@ -368,7 +369,7 @@ public:
    */
   virtual void lineHorizontal(int x_, int y_, unsigned l_, const Color& color_)
   {
-    for (auto x = x_; x < x_ + l_; ++x)
+    for (auto x = x_; x < x_ + static_cast<int>(l_); ++x)
     {
       setPixel(x, y_, color_, false);
     }
@@ -418,7 +419,7 @@ public:
   {
 
     auto flatSideTriangle = [this, x0_, y0_, x1_, y1_, x2_, y2_, fillColor_](
-      int x0, int y0, int x1, int y1, int x2, int y2, const Color& color) {
+                              int x0, int y0, int x1, int y1, int x2, int y2, const Color& color) {
       int tmpX1 = x0;
       int tmpY1 = y0;
       int tmpX2 = x0;
@@ -611,7 +612,7 @@ public:
   virtual void rectangleFilled(
     int x_, int y_, unsigned w_, unsigned h_, const Color& color_, const Color& fillColor_)
   {
-    if (x_ > width() || y_ > height() || w_ == 0 || h_ == 0)
+    if (x_ > static_cast<int>(width()) || y_ > static_cast<int>(height()) || w_ == 0u || h_ == 0u)
     {
       return;
     }
@@ -686,7 +687,7 @@ public:
     const Color& color_,
     const Color& fillColor_)
   {
-    if (x_ > width() || y_ > height() || w_ == 0 || h_ == 0)
+    if (x_ > static_cast<int>(width()) || y_ > static_cast<int>(height()) || w_ == 0u || h_ == 0u)
     {
       return;
     }
@@ -773,7 +774,7 @@ public:
     int x, y, rX0, rX1, rY0, rY1;
     rX0 = rY0 = -1 * static_cast<int>(r_);
     rX1 = rY1 = r_;
-    auto rsq = r_ * r_;
+    int rsq = r_ * r_;
 
     switch (type_)
     {
@@ -815,12 +816,12 @@ public:
     for (x = rX0; x <= rX1; ++x)
     {
       const int xAbs = x + x_;
-      if (xAbs < 0 || xAbs >= width())
+      if (xAbs < 0 || xAbs >= static_cast<int>(width()))
         continue;
       for (y = rY0; y <= rY1; ++y)
       {
         const int yAbs = y + y_;
-        if (yAbs < 0 || yAbs >= height())
+        if (yAbs < 0 || yAbs >= static_cast<int>(height()))
           continue;
         int xysq = ((x * x) + (y * y));
         if ((rsq - xysq < static_cast<int>(r_)) && (xysq - rsq < static_cast<int>(r_)))
@@ -913,7 +914,8 @@ public:
     unsigned cw = c_.width();
     unsigned ch = c_.height();
 
-    if ((xDest_ >= width()) || (yDest_ >= height()) || (xSource_ >= cw) || (ySource_ >= ch))
+    if ((xDest_ >= static_cast<int>(width())) || (yDest_ >= static_cast<int>(height()))
+        || (xSource_ >= static_cast<int>(cw)) || (ySource_ >= static_cast<int>(ch)))
     {
       return;
     }
@@ -963,7 +965,7 @@ public:
 
     const auto& character = font_.characters[c_ - font_.firstCharacter];
     if ((x_ >= static_cast<int>(width()))
-        || ((y_ - character.yOffset + font_.lineHeight) >= height()))
+        || ((y_ - character.yOffset + font_.lineHeight) >= static_cast<int>(height())))
     {
       return 0;
     }
@@ -991,8 +993,9 @@ public:
     int x_, int y_, const char* text_, const Color& color_, const Font& font_, unsigned spacing_ = 0)
   {
     uint8_t charWidth = spacing_;
-    const auto lineHeight = font_.lineHeight;
-    if ((y_ > lineHeight && (y_ - lineHeight) >= height()) || x_ > static_cast<int>(width()))
+    const int lineHeight = static_cast<int>(font_.lineHeight);
+    if ((y_ > lineHeight && (y_ - lineHeight) >= static_cast<int>(height()))
+        || x_ > static_cast<int>(width()))
     {
       return;
     }

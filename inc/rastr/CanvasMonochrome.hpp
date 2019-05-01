@@ -31,7 +31,8 @@ public:
      */
   void setPixel(int x_, int y_, const Color& color_, bool invalidate_) override
   {
-    if (x_ >= this->width() || y_ >= this->height() || color_.transparent())
+    if (x_ >= static_cast<int>(this->width()) || y_ >= static_cast<int>(this->height())
+        || color_.transparent())
     {
       return;
     }
@@ -71,7 +72,7 @@ public:
      */
   Color pixel(int x_, int y_) const override
   {
-    if (x_ >= this->width() || y_ >= this->height())
+    if (x_ >= static_cast<int>(this->width()) || y_ >= static_cast<int>(this->height()))
     {
       return {};
     }
