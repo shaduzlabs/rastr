@@ -5,5 +5,5 @@ maintainer=Vincenzo Pacella <shaduz@shaduzlabs.com>
 sentence=A small, lightweight header-only graphics library
 paragraph=rastr is a lightweight graphics library that provides basic drawing primitives, uses integer arithmetic and has no external dependencies
 category=Display
-url=https://github.com/shaduzlabs/rastr
+url=https://github.com/shaduzlabs/arduino-rastr
 architectures=*
