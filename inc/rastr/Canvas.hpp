@@ -511,7 +511,7 @@ public:
         }
 
         auto length = abs(tmpX2 - tmpX1);
-        auto xCoord = util::min(tmpX1, tmpX2);
+        auto xCoord = util::nmin(tmpX1, tmpX2);
 
         if (((signy1 > 0 && tmpY1 < y1) || (signy1 < 0 && tmpY1 >= y1)))
         {
@@ -531,16 +531,16 @@ public:
 
     if (x0_ == x1_ && x1_ == x2_)
     {
-      const auto minY = util::min(y0_, y1_, y2_);
-      const auto length = util::max(y0_, y1_, y2_) - minY;
+      const auto minY = util::nmin(y0_, y1_, y2_);
+      const auto length = util::nmax(y0_, y1_, y2_) - minY;
       lineVertical(x0_, minY, length, color_);
       return;
     }
 
     if (y0_ == y1_ && y1_ == y2_)
     {
-      const auto minX = util::min(x0_, x1_, x2_);
-      const auto length = util::max(x0_, x1_, x2_) - minX;
+      const auto minX = util::nmin(x0_, x1_, x2_);
+      const auto length = util::nmax(x0_, x1_, x2_) - minX;
       lineHorizontal(minX, y0_, length, color_);
       return;
     }
@@ -994,8 +994,7 @@ public:
   {
     uint8_t charWidth = spacing_;
     const int lineHeight = static_cast<int>(font_.lineHeight);
-    if ((y_ > lineHeight && (y_ - lineHeight) >= static_cast<int>(height()))
-        || x_ > static_cast<int>(width()))
+    if ((y_ > lineHeight && (y_ - lineHeight) >= static_cast<int>(height())) || x_ > static_cast<int>(width()))
     {
       return;
     }

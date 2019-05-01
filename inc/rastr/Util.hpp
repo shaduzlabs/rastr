@@ -29,7 +29,7 @@ void swap(T& t1, T& t2)
 // -------------------------------------------------------------------------------------------------
 
 template <typename T>
-inline T max(T a, T b)
+inline T nmax(T a, T b)
 {
   return a > b ? a : b;
 }
@@ -37,15 +37,15 @@ inline T max(T a, T b)
 // -------------------------------------------------------------------------------------------------
 
 template <typename A, typename... Args>
-A max(A a, A b, Args... args)
+A nmax(A a, A b, Args... args)
 {
-  return max(max(a, b), args...);
+  return nmax(nmax(a, b), args...);
 }
 
 //--------------------------------------------------------------------------------------------------
 
 template <typename T>
-inline T min(T a, T b)
+inline T nmin(T a, T b)
 {
   return a < b ? a : b;
 }
@@ -53,9 +53,9 @@ inline T min(T a, T b)
 // -------------------------------------------------------------------------------------------------
 
 template <typename A, typename... Args>
-A min(A a, A b, Args... args)
+A nmin(A a, A b, Args... args)
 {
-  return min(min(a, b), args...);
+  return nmin(nmin(a, b), args...);
 }
 
 // -------------------------------------------------------------------------------------------------

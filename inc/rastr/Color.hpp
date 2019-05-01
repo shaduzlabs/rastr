@@ -67,7 +67,7 @@ public:
     , m_green(green_)
     , m_blue(blue_)
     , m_alpha(alpha_)
-    , m_mono(util::max<uint8_t>(red_, green_, blue_)) // Max decomposition: take the highest value
+    , m_mono(util::nmax<uint8_t>(red_, green_, blue_)) // Max decomposition: take the highest value
   {
   }
 
@@ -110,7 +110,7 @@ public:
 
   bool active() const
   {
-    return util::max<uint8_t>(m_red, m_green, m_blue) > 127;
+    return util::nmax<uint8_t>(m_red, m_green, m_blue) > 127;
   }
   //------------------------------------------------------------------------------------------------
 
